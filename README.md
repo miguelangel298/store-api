@@ -17,6 +17,10 @@ run docker and connect to container:
 ```
  docker-compose up --build
 ```
+copy the ENV in the project:
+```
+ docker-compose exec php cp .env.example .env
+```
 install dependencies of project:
 ```
  docker-compose exec php composer install
