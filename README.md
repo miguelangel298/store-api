@@ -3,6 +3,7 @@ E-commerce store to be used in APP and web system
 
 ### Prerequisites
 * [Docker](https://www.docker.com/)
+* [Php=>7.2](https://www.php.net/releases/7_2_0.php)
 
 ### Container
  - [nginx](https://hub.docker.com/_/nginx/) 1.15.+
@@ -17,5 +18,31 @@ run docker and connect to container:
 ```
  docker-compose up --build
 ```
+run migration for creating the tables:
+```
+ docker-compose exec php bin/console doctrine:migrations:migrate
+```
+run seeder:
+```
+ docker-compose exec php bin/console doctrine:fixtures:load
+```
 call localhost in your browser:
-- [http://localhost](http://localhost/)
+- [http://localhost/api/products](http://localhost/api/products)
+
+### Usage
+
+To obtain the list of products.
+Get query params:
+
+* search.
+* category.
+* startPrice.
+* tarfetPrice.
+* page.
+* perPage.
+
+- [http://localhost/api/products](http://localhost/api/products)
+
+Create a new product.
+`Method: POST`
+- [http://localhost/api/products](http://localhost/api/products)
