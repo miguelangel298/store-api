@@ -1,7 +1,7 @@
 .idea
 .DS_Store
 **/.DS_Store
-logs/
+logs
 ###> symfony/framework-bundle ###
 symfony/.env
 symfony/public/bundles/
