@@ -20,12 +20,21 @@
     public function testAddNewProduct() {
 
       $client = static::createClient();
+      // We are looking for a category to be the evaluation.
+      $client->request('GET', '/api/products');
+
+      // We get the data and convert it into an array.
+      $products = $client->getResponse()->getContent();
+      $productArray = json_decode($products, true);
+
+      // Category evaluation
+      $category = $productArray['products'][0]['category']['id'];
 
       $product= [
         'name' => 'ReactJS',
         'description' => 'React makes it painless to create interactive UIs.',
         'price' => '100',
-        'category' => 1,
+        'category' => $category,
       ];
 
       $client->request('POST', '/api/products', $product);
@@ -48,7 +57,8 @@
       $newProduct = $client->getResponse()->getContent();
       $productArray = json_decode($newProduct, true);
 
-      $this->assertEquals('a', $productArray['products'][0]['name'][0]);
+      $expect = $productArray['products'][0]['name'][0];
+      $this->assertEquals('a', strtolower($expect));
       $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
