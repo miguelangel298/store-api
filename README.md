@@ -3,7 +3,6 @@ E-commerce store to be used in APP and web system
 
 ### Prerequisites
 * [Docker](https://www.docker.com/)
-* [Php=>7.2](https://www.php.net/releases/7_2_0.php)
 
 ### Container
  - [nginx](https://hub.docker.com/_/nginx/) 1.15.+
