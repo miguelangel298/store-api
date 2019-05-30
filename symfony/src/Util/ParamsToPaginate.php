@@ -2,6 +2,8 @@
   namespace App\Util;
 
 
+  use phpDocumentor\Reflection\Types\This;
+
   /**
    * Class ParamsToPaginate will act as an interface
    * to params the routs
@@ -12,8 +14,8 @@
 
     private $sort = 'ASC';
     private $field = 'name';
-    private $search = '~!-';
-    private $category = '~!-';
+    private $search = '';
+    private $category = '';
     private $startPrice = 0;
     private $targetPrice = 100000;
     private $page = 1;
@@ -70,7 +72,11 @@
     }
 
     public function getSearch(): string {
-        return $this->search;
+      if ($this->category != "" && $this->search == '') {
+        $this->setSearch('*');
+      }
+      return $this->search;
+
     }
 
     public function getPage(): string {
@@ -82,6 +88,9 @@
     }
 
     public function getCategory(): string {
+      if ($this->search != '' && $this->category == '') {
+        $this->setCategory('*');
+      }
         return $this->category;
     }
 
