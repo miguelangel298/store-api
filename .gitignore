@@ -1,9 +1,24 @@
 .idea
 .DS_Store
 **/.DS_Store
+logs/
 ###> symfony/framework-bundle ###
 symfony/.env
 symfony/public/bundles/
 symfony/var/
 symfony/vendor/
 ###< symfony/framework-bundle ###
+###> symfony/framework-bundle ###
+symfony/.env.local
+symfony/.env.local.php
+symfony/.env.*.local
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

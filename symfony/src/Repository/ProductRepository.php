@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Util\ParamsToPaginate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,32 +20,26 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Product[] Returns an array of Product objects
+      */
+
+
+    public function getAllByFilterQuery(ParamsToPaginate $query)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+         return $this->createQueryBuilder('p')
+            ->leftJoin('p.category', 'c')
+            ->orWhere('p.name LIKE :searchTerm')
+            ->orWhere('c.name LIKE :category')
+            ->andWhere('p.price BETWEEN :startPrice AND :targetPrice')
+            ->setParameter('startPrice', $query->getStartPrice())
+            ->setParameter('targetPrice', $query->getTargetPrice())
+            ->setParameter('searchTerm', '%'.$query->getSearch().'%')
+            ->setParameter('category', '%'.$query->getCategory().'%')
+            ->orderBy('p.'.$query->getField(), $query->getSort())
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
