@@ -30,12 +30,12 @@
      */
     public function getProductAction(Request $request)
     {
-      $page = $request->query->get('page'); // get a $_GET parameter
       $query = new RoutePaginate($request);
       $query = $query->getQuery();
 
-      dd($query);
-      $products = $this->productRepository->findAll();
+      $products = $this->productRepository->getAllByFilterQuery($query);
+
+
       return new JsonResponse(['products' => $products]);
     }
 
