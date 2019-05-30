@@ -18,6 +18,10 @@ run docker and connect to container:
 ```
  docker-compose up --build
 ```
+install dependencies of project:
+```
+ docker-compose exec php composer install
+```
 run migration for creating the tables:
 ```
  docker-compose exec php bin/console doctrine:migrations:migrate
@@ -46,3 +50,9 @@ Get query params:
 Create a new product.
 `Method: POST`
 - [http://localhost/api/products](http://localhost/api/products)
+
+### Test
+
+```
+docker-compose exec php bin/phpunit
+```
