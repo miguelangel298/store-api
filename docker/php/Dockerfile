@@ -44,8 +44,6 @@ ADD php-fpm.conf /etc/php7/php-fpm.d/
 
 WORKDIR /var/www/symfony
 
-COPY .env.example .env
-
 RUN adduser -D -g 'www' www \
     && chown -R www:www /var/www
 
